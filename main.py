@@ -40,7 +40,7 @@ def play_audio(waveform_filename, stop_flag, lock):
 def main():
     parser = ArgumentParser(prog='EMG Music', description='Play a song using LibEMG!')
     parser.add_argument('subject', help='Subject ID.')
-    parser.add_argument('action', choices=('sgt', 'notes', 'chords'), help='Action to perform.')
+    parser.add_argument('action', choices=('sgt', 'play'), help='Action to perform.')
     args = parser.parse_args()
     print(args)
 
