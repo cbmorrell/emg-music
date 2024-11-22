@@ -1,7 +1,6 @@
 from argparse import ArgumentParser
 from pathlib import Path
 from collections import deque
-# from multiprocessing import Process, Lock
 from threading import Thread, Lock
 
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
@@ -34,7 +33,6 @@ def play_audio(waveform_filename, stop_flag, lock):
         while wav_data and not stop_flag[0]:
             stream.write(wav_data)
             wav_data = wf.readframes(chunk)
-
 
 
 def main():
