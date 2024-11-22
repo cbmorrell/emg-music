@@ -71,19 +71,19 @@ def main():
         windows, metadata = odh.parse_windows(window_size=window_size, window_increment=window_increment)
         labels = metadata['classes']
         fe = libemg.feature_extractor.FeatureExtractor()
-        feature_list = fe.get_feature_groups()['HTD']
+        feature_list = fe.get_feature_groups()['LS4']
         feature_matrix = fe.extract_features(feature_list, windows, array=True)
         clf = LinearDiscriminantAnalysis()
         clf.fit(feature_matrix, labels)
         offline_model = libemg.emg_predictor.EMGClassifier(clf)
         offline_model.add_velocity(windows, labels)
-        offline_model.add_rejection(threshold=0.5)
+        offline_model.add_rejection(threshold=0.7)
         online_model = libemg.emg_predictor.OnlineEMGClassifier(offline_model, window_size, window_increment, online_data_handler, feature_list)
         online_model.run(block=False)
 
         controller = libemg.environments.controllers.ClassifierController(output_format='predictions', num_classes=len(gesture_ids))
         
-        q = deque(maxlen=3)
+        q = deque(maxlen=4)
         class_to_audio_map = {
             0: 'C4.wav',    # close
             1: 'A4.wav',    # open
