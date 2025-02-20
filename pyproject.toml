@@ -1,0 +1,13 @@
+[project]
+name = "emg-music"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10.15"
+dependencies = [
+    "libemg",
+    "pyaudio>=0.2.14",
+]
+
+[tool.uv.sources]
+libemg = { path = "../libemg" }
